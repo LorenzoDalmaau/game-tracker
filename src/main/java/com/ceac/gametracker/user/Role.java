@@ -1,4 +1,7 @@
 package com.ceac.gametracker.user;
 
-public class Role {
+
+public enum Role {
+    USER,
+    ADMIN
 }
