@@ -1,4 +1,13 @@
 package com.ceac.gametracker.match.dto;
 
-public class MatchResponse {
-}
+
+import java.time.Instant;
+
+public record MatchResponse(
+        Long id,
+        Long gameId,
+        String gameName,
+        Result result,
+        int score,
+        Instant playedAt
+) {}

@@ -1,4 +1,8 @@
 package com.ceac.gametracker.auth.dto;
 
-public class LoginRequest {
-}
+import jakarta.validation.constraints.NotBlank;
+
+public record LoginRequest (
+        @NotBlank String usernameOrEmail,
+        @NotBlank String password
+){}

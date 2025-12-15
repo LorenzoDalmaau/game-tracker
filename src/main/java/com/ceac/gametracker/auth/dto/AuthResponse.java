@@ -1,4 +1,7 @@
 package com.ceac.gametracker.auth.dto;
 
-public class AuthResponse {
-}
+public record AuthResponse(
+        Long userId,
+        String username,
+        String role
+) {}

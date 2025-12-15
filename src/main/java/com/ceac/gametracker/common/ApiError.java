@@ -1,4 +1,10 @@
 package com.ceac.gametracker.common;
 
-public class ApiError {
-}
+import java.time.Instant;
+
+public record ApiError(
+        Instant timestamp,
+        int status,
+        String message
+) {}
+
