@@ -18,6 +18,7 @@ public class GameService {
     }
 
     public Game create(String name) {
+        System.out.println("Game created (create - Service): " + name);
         return gameRepository.save(new Game(name));
     }
 

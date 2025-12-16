@@ -37,15 +37,23 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        // Público
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/games/**").permitAll()
-                        .requestMatchers("/api/games/**").hasRole("ADMIN")
-                        .requestMatchers("/api/matches/**").hasRole("USER")
+
+                        // Admin puede modificar juegos
+                        .requestMatchers(HttpMethod.POST, "/api/games/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/games/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/games/**").hasRole("ADMIN")
+
+                        // Matches: USER o ADMIN
+                        .requestMatchers("/api/matches/**").hasAnyRole("USER", "ADMIN")
+
+                        // Cualquier otra cosa: autenticado
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-
     }
 }

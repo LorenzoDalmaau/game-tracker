@@ -37,6 +37,8 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login (@Valid @RequestBody LoginRequest req) {
         var result = authService.login(req);
 
+        System.out.println("ESTO ES UNA PRUEBA");
+
         return ResponseEntity
                 .ok()
                 .header(HttpHeaders.AUTHORIZATION, "Bearer " + result.token())

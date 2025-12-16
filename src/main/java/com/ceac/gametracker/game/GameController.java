@@ -1,5 +1,6 @@
 package com.ceac.gametracker.game;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +28,10 @@ public class GameController {
     }
 
     @PostMapping
-    public GameResponse create (@RequestBody GameRequest req) {
+    public GameResponse create (@Valid @RequestBody GameRequest req) {
+        System.out.println("Game created: " + req.name());
         Game g = service.create(req.name);
+        System.out.println("Game created: " + req.name);
         return new GameResponse(g.getId(), g.getName());
     }
 
